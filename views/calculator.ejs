@@ -1,134 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
 <style>
-    @font-face {
-        font-family: "Open 24 Display St";
-        src: url('./../assets/font/Open-24-Display-St.ttf');
-    }
 
-    .botones {
-        display: block;
-        width: 100vw;
-        padding-left: 38vw;
-    }
+.container {
+  display: flex;
+  align-items: flex-start;
+}
 
-    input {
-        width: 50vw;
-        border: 0;
-        background-color: black;
-        color: white;
-        font-size: 15vh;
-        text-align: end;
-    }
+.historial-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-    div {
-        display: flex;
-    }
+.historial {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 5px;
+  background-color: grey;
+  display: none;
+  max-height: 200px;
+  overflow-y: auto;
+}
 
-    button {
-        width: 15vh;
-        height: 15vh;
-        border-radius: 100%;
-        font-size: 3.5em;
-        margin: 0.3%;
-    }
+.calculadora {
+  font-family: 'Open 24 Display St';
+  width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: black;
+  border-radius: 10px;
+}
 
-    .cero {
-        width: 30vh;
-        border-radius: 50vh;
-        text-align: left;
-        padding-left: 35px;
-        padding-right: 100px;
+#historialBtn {
+  font-size: 30px;
+  padding: 35px 100px; 
+  border: none;
+  border-radius: 25px;
+  background-color: orange;
+}
 
-    }
+.historial div {
+  background-color: grey;
+  padding: 5px;
+  border-radius: 3px;
+  margin-bottom: 5px;
+}
 
-    .pantalla {
-        background-color: black;
-    }
+        .botones {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 10px;
+        }
 
-    .pantalla-calculadora {
-        background-color: black;
-    }
+        input {
+            width: 100%;
+            border: 0;
+            background-color: black;
+            color: white;
+            font-size: 15vh;
+            text-align: end;
+        }
 
-    .calculadora {
-        font-family: 'Open 24 Display St';
-        display: flex;
-        flex-direction: column;
-        width: fit-content;
-    }
+        button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 100%;
+            width: 90px;
+            height: 90px;
+            font-size: 24px;
+        }
 
-    .pantalla {
-        text-align: end;
-        width: 45vh;
-        overflow: hidden;
-        margin-left: 38vw;
-    }
+        .cero {
+            width: 100%;
+            border-radius: 10vh;
+            grid-column: span 2;
+            justify-content: center;
+        }
 
-    .pantalla-botones {
-        display: flex;
+        .pantalla {
+            background-color: black;
+        }
 
-    }
+        .pantalla-calculadora {
+            background-color: black;
+        }
 
-    .ColorGris {
-        background-color: rgb(195, 187, 187);
-    }
+        .pantalla {
+            background-color: #0000;
+            color: white;
+            border-radius: 5px;
+            padding: 10px;
+            text-align: right;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
 
-    .ColorNaranja {
-        background-color: orange;
-    }
-</style>
+        .ColorGris {
+            background-color: rgb(195, 187, 187);
+        }
 
+        .ColorNaranja {
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+    <body>
 
-<div class="calculadora">
-    <div class="pantalla">
-        <input type="" name="mogul">
-        <div class="pantalla-botones">
-            <button onclick="borrar2()">X</button>
-        </div>
+        <div class="container">
+      
+          <div class="historial-container">
+            <button id="historialBtn" onclick="toggleHistorial()" style="margin: 0 auto;">
+              Historial  
+            </button>
+      
+            <div class="historial" id="historial"></div>
+          </div>
+      
+          <div class="calculadora">
 
-    </div>
-    <div class="containerbtn">
+        <div class="pantalla" id="display">0</div>
+
         <div class="botones">
-
-
-            <div class="botones-fx">
-                <button onclick="borrar()">AC</button>
-                <button onclick="">(</button>
-                <button onclick="">)</button>
-                <button class="ColorNaranja" onclick="dividir()">/</button>
-            </div>
-
-            <div class="botones-num">
-                <button class="ColorGris" onclick="num(7)">7</button>
-                <button class="ColorGris" onclick="num(8)">8</button>
-                <button class="ColorGris" onclick="num(9)">9</button>
-                <button class="ColorNaranja" onclick="product()">x</button>
-            </div>
-
-            <div class="botones-num">
-                <button class="ColorGris" onclick="num(4)">4</button>
-                <button class="ColorGris" onclick="num(5)">5</button>
-                <button class="ColorGris" onclick="num(6)">6</button>
-                <button class="ColorNaranja" onclick="rest()">-</button>
-            </div>
-            <div class="botones-num">
-                <button class="ColorGris" onclick="num(1)">1</button>
-                <button class="ColorGris" onclick="num(2)">2</button>
-                <button class="ColorGris" onclick="num(3)">3</button>
-                <button class="ColorNaranja" onclick="suma()">+</button>
-            </div>
-            <div class="botones-num">
-                <button class="ColorGris cero" onclick="num(0)">0</button>
-                <button class="ColorGris punto" onclick="coma()">.</button>
-                <button class="ColorNaranja" class="igual" onclick="resultado()">=</button>
-            </div>
+            <button onclick="clearDisplay()">AC</button>
+            <button onclick="addToDisplay('(')">(</button>
+            <button onclick="addToDisplay(')')">)</button>
+            <button class="ColorNaranja" onclick="addToDisplay('/')">/</button>
+            <button class="ColorGris" onclick="addToDisplay('7')">7</button>
+            <button class="ColorGris" onclick="addToDisplay('8')">8</button>
+            <button class="ColorGris" onclick="addToDisplay('9')">9</button>
+            <button class="ColorNaranja" onclick="addToDisplay('*')">x</button>
+            <button class="ColorGris" onclick="addToDisplay('4')">4</button>
+            <button class="ColorGris" onclick="addToDisplay('5')">5</button>
+            <button class="ColorGris" onclick="addToDisplay('6')">6</button>
+            <button class="ColorNaranja" onclick="addToDisplay('-')">-</button>
+            <button class="ColorGris" onclick="addToDisplay('1')">1</button>
+            <button class="ColorGris" onclick="addToDisplay('2')">2</button>
+            <button class="ColorGris" onclick="addToDisplay('3')">3</button>
+            <button class="ColorNaranja" onclick="addToDisplay('+')">+</button>
+            <button class="ColorGris cero" onclick="addToDisplay('0')">0</button>
+            <button class="ColorGris punto" onclick="addToDisplay('.')">.</button>
+            <button class="ColorNaranja" onclick="calculate()">=</button>
         </div>
     </div>
 </div>
-
 <script>
-    function borrar() {
-        alert("ola")
-    }
-    function num(num) {
+    let currentInput = '';
+    let calculations = [];
+    let screen = document.getElementById('display');
+    let historialVisible = false;
 
+    function addToDisplay(value) {
+        currentInput += value;
+        screen.innerText = currentInput
+    }
+
+    function clearDisplay() {
+        currentInput = '';
+        screen.innerText = '0'; 
+    }
+
+    function calculate() {
+        try {
+            const result = eval(currentInput);
+            const calculation = {
+                input: currentInput,
+                result: result
+            };
+            calculations.push(calculation);
+            saveCalculations(calculations);
+            currentInput = '';
+            screen.innerText = result;
+        } catch (error) {
+            currentInput = '';
+            document.getElementById('display').value = 'Error';
+        }
+    }
+
+    function saveCalculations(calculations) {
+        fetch('/save', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(calculations)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.message);
+            const historial = document.getElementById('historial');
+            historial.innerHTML = '';
+            calculations.forEach(calculation => {
+                const div = document.createElement('div');
+                div.textContent = `${calculation.input} = ${calculation.result}`;
+                historial.appendChild(div);
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    const historialBtn = document.getElementById('historialBtn');
+    const historialList = document.getElementById('historial');
+
+    function toggleHistorial() {
+        historialVisible = !historialVisible;
+        if (historialVisible) {
+            historialList.style.display = 'none';
+        } else {
+            historialList.style.display = 'block';
+        }
     }
 </script>
+</body>
+</html>
